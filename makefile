@@ -1,15 +1,6 @@
-CC = gcc
-CFLAGS = -Wall
-SRC_DIR = src
-BIN_DIR = bin
+compile:
+	gcc -Wall -g3 -fsanitize=address -pthread ./src/server.c -o ./bin/server
+	gcc -Wall -g3 -fsanitize=address -pthread ./src/client.c -o ./bin/client
+FLAGS    = -L /lib64
+LIBS     = -lusb-1.0 -l pthread
 
-all: server client
-
-server: $(SRC_DIR)/server.c
-	$(CC) $(CFLAGS) -o $(BIN_DIR)/server $(SRC_DIR)/server.c
-
-client: $(SRC_DIR)/client.c
-	$(CC) $(CFLAGS) -o $(BIN_DIR)/client $(SRC_DIR)/client.c
-
-clean:
-	rm -f $(BIN_DIR)/server $(BIN_DIR)/client
